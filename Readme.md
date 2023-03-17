@@ -36,7 +36,7 @@ composer require donejeh/nuban
 ```
 
 ## Usage 1 with bank code (recommended)
- In yoyr app controller 
+ In your app controller 
 ```
 
 $nubanApi = app(NubanApi::class);
