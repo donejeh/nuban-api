@@ -16,7 +16,76 @@ composer require donejeh/nuban
 
 ## Application Service Providers...
 ```
- Donejeh\Nuban\NubanServiceProvider::class
+ Donejeh\Nuban\NubapiServiceProvider::class
+
+```
+
+## Publish the config file
+```cmd
+php artisan vendor:publish --provider="Donejeh\Nuban\NubapiServiceProvider" --tag="config"
+```
+
+## Default config file contents 
+
+```php
+<?php
+
+return [
+
+
+    // The Host of the API.
+    'host' => env('NUB_API_HOST', 'https://nubapi.com/api'),
+
+
+    /**
+     * Your API Token from (https://nubapi.com/user/api-tokens)
+     *
+     */
+    'api_token' => env('NUB_API_TOKEN', ''),
+
+
+
+     'options' => [
+            // Validate number on your server without making an APi request.
+            'validate_number_locally' => true,
+
+             //This timeout applies to client connections and determine when
+             //The whole response must be read before it exceeded
+             'request_timeout' => 5,
+
+        ]
+
+
+
+];
+
+```
+
+
+
+## API Usage
+Sign up for a developer account by selecting the [Sign Up](https://nubapi.com/register) button.
+After signing up, access your account dashboard.
+
+You can follow these steps to obtain your API key and configure it in your application:
+
+1. Go to the [API Create Access Tokens](https://nubapi.com/user/api-tokens) page.
+
+2. Generate your unique API key.
+
+3. Once you have your API key, insert it into either your `.env` file or the configuration file.
+
+
+ In your app controller 
+```
+use Donejeh\Nuban\Nubapi;
+
+
+$nubanApi = app(NubanApi::class);
+$response = $nubanApi->getAccountDetails('1056684123', '013');
+
+print_r($response);
+
 
 ```
 
@@ -27,37 +96,17 @@ composer require donejeh/nuban
 {
     "account_number": "0080******",
     "account_name": "Jane Doe",
+    "first_name: : "Jane"
+    "last_name: : "Doe"
     "Bank_name": "ACCESS BANK PLC",
     "bank_code": "044",
     "requests": "Free",
-    "execution_time": "0.17 secs",
     "status": "success"
 }
 ```
 
-## Usage 1 with bank code (recommended)
- In your app controller 
-```
-
-$nubanApi = app(NubanApi::class);
-$response = $nubanApi->getAccountDetails('1056684123', '013');
-
-print_r($response);
 
 
-```
-
-## Usage 2 without bank code
- In yoyr app controller 
-```
-
-$nubanApi = app(NubanApi::class);
-$response = $nubanApi->getAccountDetails('1052222890', null);
-
-print_r($response);
-
-
-```
 
 ## Useful links 
   - Bank list Codes https://gist.github.com/donejeh/591f2739d986d7ae6338ea2921d03cf4
