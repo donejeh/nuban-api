@@ -11,7 +11,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Donejeh\\Nuban\\NubanServiceProvider"
+                "Donejeh\\Nuban\\NubapiServiceProvider"
             ]
         }
     },
