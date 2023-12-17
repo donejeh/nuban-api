@@ -81,7 +81,7 @@ You can follow these steps to obtain your API key and configure it in your appli
 use Donejeh\Nuban\Nubapi;
 
 
-$nubanApi = app(NubanApi::class);
+$nubanApi = app(NubApi::class);
 $response = $nubanApi->getAccountDetails('1056684123', '013');
 
 print_r($response);
